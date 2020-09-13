@@ -1,5 +1,7 @@
 # traffic
 
+[![Actions Status](https://github.com/jimparr19/traffic/workflows/Python%20package/badge.svg)](https://github.com/jimparr19/traffic/actions)
+
 Details of the approach can be found in [notebooks/0.Exploration.ipynb](./notebooks/0.Exploration.ipynb)
 
 ## Installation 
