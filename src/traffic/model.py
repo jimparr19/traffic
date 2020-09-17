@@ -24,7 +24,7 @@ class Model(ABC):
         return network
 
     def get_trip_nodes(self, origin, destination):
-        path_nodes = nx.shortest_path(self.network, source=origin, target=destination)
+        path_nodes = nx.shortest_path(self.network, source=origin, target=destination, weight='length')
         return path_nodes
 
     def get_trip_distance(self, origin, destination):
@@ -34,13 +34,13 @@ class Model(ABC):
     def get_trip_duration_mean(self, origin, destination):
         if self.trip_data is None:
             raise AttributeError("Edge attribute 'duration_mean' not yet computed. Please add trips first.")
-        path_nodes = nx.shortest_path(self.network, source=origin, target=destination)
+        path_nodes = self.get_trip_nodes(origin, destination)
         return sum([self.network.edges[u, v]['duration_mean'] for u, v in zip(path_nodes[:-1], path_nodes[1:])])
 
     def get_trip_duration_std(self, origin, destination):
         if self.trip_data is None:
             raise AttributeError("Edge attribute 'duration_std' not yet computed. Please add trips first.")
-        path_nodes = nx.shortest_path(self.network, source=origin, target=destination)
+        path_nodes = self.get_trip_nodes(origin, destination)
         return np.sqrt(
             sum([self.network.edges[u, v]['duration_std'] ** 2 for u, v in zip(path_nodes[:-1], path_nodes[1:])]))
 
