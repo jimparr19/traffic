@@ -22,7 +22,7 @@ test_df['predicted_travel_time_avg'] = [enhanced_model.network.edges[(x.u_id, x.
 test_df['predicted_travel_time_std'] = [enhanced_model.network.edges[(x.u_id, x.v_id)]['duration_std'] for x in
                                         test_df.itertuples()]
 
-test_df['travel_time_avg_err'] = test_df['travel_time_avg'] = test_df['predicted_travel_time_avg']
+test_df['travel_time_avg_err'] = test_df['travel_time_avg'] - test_df['predicted_travel_time_avg']
 
 print(test_df.head())
 print(test_df['travel_time_avg_err'].abs().mean())
